@@ -1,100 +1,210 @@
-# DevIntel - Developer Intelligence Platform
+<div align="center">
 
-## Overview
+# 🧠✨ HamsiDevIntel Pro ✨🧠
 
-DevIntel is a full-stack Developer Intelligence Platform designed to help developers analyze their GitHub profiles, evaluate resumes using ATS scoring, generate PDF reports, and receive personalized career recommendations. The platform provides insights into developer skills, repositories, programming languages, and career growth opportunities.
+### 🚀 AI-Powered Developer Intelligence Platform 🚀
 
-## Features
+<img src="https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=900&size=35&pause=1000&color=00D9FF&center=true&vCenter=true&width=1000&lines=HamsiDevIntel+Pro;GitHub+Profile+Analytics;ATS+Resume+Analyzer;Developer+Score+Generator;Career+Roadmap+Platform;Interview+Preparation+System" />
 
-### GitHub Profile Analysis
+<br>
 
-* Analyze GitHub profiles using username
-* View repositories, contributions, and activity
-* Evaluate developer profile strength
+<img src="https://user-images.githubusercontent.com/74038190/216656977-ef584e23-c9a0-4f89-bf7b-7d58d2f9a7c7.gif" width="700"/>
 
-### Developer Score
+<br>
 
-* Calculate overall developer score
-* Analyze coding activity and project quality
-* Measure profile completeness
+## 🌐 Live Deployment
 
-### Resume ATS Analyzer
+<a href="https://hamsidevintel.onrender.com">
+<img src="https://img.shields.io/badge/🚀%20OPEN%20LIVE%20APPLICATION-00D9FF?style=for-the-badge&logo=render&logoColor=white"/>
+</a>
 
-* Upload resume PDF files
-* Generate ATS compatibility score
-* Identify matching skills
-* Suggest suitable job roles
+<br><br>
 
-### PDF Report Generation
+# 🔥 Try It Now
 
-* Download ATS analysis reports
-* Export resume evaluation results
-* Professional PDF report format
+### 👉 https://hamsidevintel.onrender.com 👈
 
-### Career Roadmap
+<br>
 
-* Personalized career recommendations
-* Learning path suggestions
-* Skill improvement guidance
+<img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"/>
+<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white"/>
+<img src="https://img.shields.io/badge/Spring%20Security-00A86B?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white"/>
+<img src="https://img.shields.io/badge/H2%20Database-1E90FF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black"/>
 
-### Interview Preparation
-
-* Technical interview questions
-* Role-based question recommendations
-* Preparation guidance
-
-### Authentication System
-
-* User Registration
-* User Login
-* Secure Password Encryption
-
-### Resume History
-
-* Save previous resume analyses
-* View historical ATS reports
-* Track improvement over time
+</div>
 
 ---
 
-## Technology Stack
+# 🌟 Project Overview
 
-### Backend
+**HamsiDevIntel Pro** is an AI-powered Developer Intelligence Platform that helps developers analyze GitHub profiles, evaluate resumes using ATS scoring, generate professional PDF reports, and receive personalized career guidance.
 
-* Java 17
-* Spring Boot
-* Spring Security
-* Spring Data JPA
-* Hibernate
-* Maven
-
-### Frontend
-
-* HTML5
-* CSS3
-* JavaScript
-
-### Database
-
-* H2 Database (Deployment)
-* MySQL (Local Development)
-
-### Libraries
-
-* Lombok
-* Apache PDFBox
-* iTextPDF
-
-### Deployment
-
-* Docker
-* Render
-* GitHub
+The platform combines GitHub analytics, resume intelligence, developer scoring, interview preparation, and career roadmaps into one modern application.
 
 ---
 
-## Project Structure
+# 🚀 Key Features
 
+## 🧑‍💻 GitHub Profile Analysis
+
+✅ Analyze GitHub profiles using username
+
+✅ Repository insights and analytics
+
+✅ Developer profile evaluation
+
+✅ Coding activity tracking
+
+---
+
+## 📊 Developer Score
+
+✅ Overall developer score generation
+
+✅ Profile completeness analysis
+
+✅ Coding activity assessment
+
+✅ Project quality evaluation
+
+---
+
+## 📄 ATS Resume Analyzer
+
+✅ Resume PDF upload
+
+✅ ATS compatibility scoring
+
+✅ Skill extraction
+
+✅ Job role recommendations
+
+✅ Resume improvement suggestions
+
+---
+
+## 📥 PDF Report Generation
+
+✅ Download ATS reports
+
+✅ Export analysis results
+
+✅ Professional PDF reports
+
+✅ Resume evaluation summaries
+
+---
+
+## 🛣️ Career Roadmap
+
+✅ Personalized learning path
+
+✅ Career growth recommendations
+
+✅ Skill enhancement guidance
+
+✅ Technology roadmap generation
+
+---
+
+## 🎯 Interview Preparation
+
+✅ Technical interview questions
+
+✅ Role-based preparation
+
+✅ Career-focused recommendations
+
+✅ Placement readiness support
+
+---
+
+## 🔐 Authentication System
+
+✅ User Registration
+
+✅ Secure Login
+
+✅ Password Encryption
+
+✅ Session Management
+
+---
+
+## 📚 Resume History
+
+✅ Save ATS reports
+
+✅ Track resume improvements
+
+✅ View historical analyses
+
+✅ Resume management dashboard
+
+---
+
+# 🛠️ Technology Stack
+
+## Backend
+
+☕ Java 17
+
+🍃 Spring Boot
+
+🔐 Spring Security
+
+🗄️ Spring Data JPA
+
+⚙️ Hibernate
+
+📦 Maven
+
+---
+
+## Frontend
+
+🌐 HTML5
+
+🎨 CSS3
+
+⚡ JavaScript
+
+---
+
+## Database
+
+🛢️ MySQL
+
+🗄️ H2 Database
+
+---
+
+## Libraries
+
+📄 Apache PDFBox
+
+📑 iTextPDF
+
+🚀 Lombok
+
+---
+
+## Deployment
+
+🐳 Docker
+
+☁️ Render
+
+🐙 GitHub
+
+---
+
+# 📂 Project Structure
+
+```text
 src
 ├── controller
 ├── service
@@ -112,77 +222,90 @@ resources
 │   ├── login.html
 │   └── register.html
 └── application.properties
+```
 
 ---
 
-## Installation
+# 🚀 Installation
 
-### Clone Repository
+## Clone Repository
 
+```bash
 git clone https://github.com/Hamsiny-C/developer-intelligence-platform.git
+```
 
-### Navigate to Project
+## Navigate To Project
 
+```bash
 cd developer-intelligence-platform
+```
 
-### Run Application
+## Run Application
 
+```bash
 ./mvnw spring-boot:run
+```
 
-### Open Browser
+## Open Browser
 
+```bash
 http://localhost:8080
+```
 
 ---
 
-## Live Demo
+# 🌍 Live Demo
 
-https://hamsidevintel.onrender.com
+## 🚀 Deployment Link
 
----
-
-## GitHub Repository
-
-https://github.com/Hamsiny-C/developer-intelligence-platform
+### https://hamsidevintel.onrender.com
 
 ---
 
-## Key Functionalities
+# 🔮 Future Enhancements
 
-* GitHub Profile Intelligence
-* Developer Performance Analysis
-* ATS Resume Evaluation
-* PDF Report Generation
-* Career Guidance
-* Interview Preparation
-* User Authentication
-* Resume Analysis History
+🌟 AI Resume Suggestions
 
----
+🌟 LinkedIn Profile Analysis
 
-## Future Enhancements
+🌟 Skill Gap Detection
 
-* AI-Based Resume Suggestions
-* LinkedIn Profile Analysis
-* Skill Gap Detection
-* Job Recommendation Engine
-* Recruiter Dashboard
-* Advanced Analytics
-* Multi-User Support
-* Cloud Database Integration
+🌟 Job Recommendation Engine
+
+🌟 Recruiter Dashboard
+
+🌟 Advanced Analytics
+
+🌟 Cloud Database Integration
+
+🌟 Multi-User Support
 
 ---
 
-## Author
+# 👩‍💻 Developer
 
-Hamsiny C
+## 🌸 Hamsiny C
 
-Bachelor of Engineering (Computer Science)
+🎓 Bachelor of Engineering (Computer Science)
 
-Passionate Software Developer focused on Java, Spring Boot, Full Stack Development, Cloud Technologies, and Software Engineering.
+☕ Java Full Stack Developer
+
+🚀 Spring Boot Enthusiast
+
+💡 Passionate Software Engineer
+
+🌐 Exploring Cloud & DevOps
 
 ---
 
-## License
+<div align="center">
 
-This project is developed for educational, portfolio, and learning purposes.
+<img src="https://readme-typing-svg.herokuapp.com?font=Pacifico&size=24&pause=1000&color=FF69B4&center=true&vCenter=true&width=900&lines=Analyze+Build+Grow;Developer+Intelligence+Made+Easy;Powered+By+Java+And+Spring+Boot;Built+With+❤️+By+Hamsiny+C" />
+
+<br>
+
+### ⭐ If you like this project, give it a Star ⭐
+
+### 🚀 Empowering Developers Through Intelligence 🚀
+
+</div>
