@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevIntel — AI Developer Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500@display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     LOADING SCREEN
+     ═══════════════════════════════════════════ -->
+<div id="global-loader" class="global-loader">
+  <div class="loader-ring-wrap">
+    <svg class="loader-svg" viewBox="0 0 100 100">
+      <circle class="lr-track" cx="50" cy="50" r="42"/>
+      <circle class="lr-fill"  cx="50" cy="50" r="42"/>
+    </svg>
+    <div class="loader-logo"><i class="fa-solid fa-hexagon-nodes"></i></div>
+  </div>
+  <p class="loader-label">Analyzing <span id="loader-uname"></span></p>
+  <div class="loader-steps">
+    <div class="ls" id="ls1"><i class="fa-solid fa-circle-dot"></i><span>Fetching GitHub profile</span></div>
+    <div class="ls" id="ls2"><i class="fa-regular fa-circle"></i><span>Computing developer score</span></div>
+    <div class="ls" id="ls3"><i class="fa-regular fa-circle"></i><span>Generating recruiter insights</span></div>
+    <div class="ls" id="ls4"><i class="fa-regular fa-circle"></i><span>Building career roadmap</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     TOAST NOTIFICATION
+     ═══════════════════════════════════════════ -->
+<div id="toast" class="toast">
+  <i class="fa-solid fa-triangle-exclamation"></i>
+  <span id="toast-msg"></span>
+  <button onclick="hideToast()"><i class="fa-solid fa-xmark"></i></button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MAIN APP SHELL
+     ═══════════════════════════════════════════ -->
+<div class="app-shell" id="app-shell">
+
+  <!-- ──────────────────────────────────
+       SIDEBAR
+       ────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Logo -->
+    <div class="sb-logo">
+      <div class="sb-logo-icon">
+        <i class="fa-solid fa-hexagon-nodes"></i>
+      </div>
+      <div class="sb-logo-text">
+        <span class="sb-brand">DevIntel</span>
+        <span class="sb-tagline">AI Intelligence</span>
+      </div>
+    </div>
+
+    <!-- Nav label -->
+    <div class="sb-section-label">Navigation</div>
+
+    <!-- Nav items -->
+    <nav class="sb-nav" id="sb-nav">
+      <a class="sb-item active" data-section="overview">
+        <span class="sb-icon"><i class="fa-solid fa-gauge-high"></i></span>
+        <span class="sb-label">Overview</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="github-profile">
+        <span class="sb-icon"><i class="fa-brands fa-github"></i></span>
+        <span class="sb-label">GitHub Profile</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="developer-score">
+        <span class="sb-icon"><i class="fa-solid fa-bolt"></i></span>
+        <span class="sb-label">Developer Score</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="recruiter-view">
+        <span class="sb-icon"><i class="fa-solid fa-briefcase"></i></span>
+        <span class="sb-label">Recruiter View</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="languages">
+        <span class="sb-icon"><i class="fa-solid fa-code"></i></span>
+        <span class="sb-label">Languages</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="recommendations">
+        <span class="sb-icon"><i class="fa-solid fa-lightbulb"></i></span>
+        <span class="sb-label">Recommendations</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="roadmap">
+        <span class="sb-icon"><i class="fa-solid fa-map"></i></span>
+        <span class="sb-label">Career Roadmap</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="interview">
+        <span class="sb-icon"><i class="fa-solid fa-circle-question"></i></span>
+        <span class="sb-label">Interview Questions</span>
+        <span class="sb-dot"></span>
+      </a>
+      <a class="sb-item" data-section="resume-analyzer">
+  <span class="sb-icon"><i class="fa-solid fa-file-lines"></i></span>
+  <span class="sb-label">Resume Analyzer</span>
+  <span class="sb-dot"></span>
+</a>
+<a class="sb-item" data-section="resume-history">
+  <span class="sb-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
+  <span class="sb-label">Resume History</span>
+  <span class="sb-dot"></span>
+</a>
+      <a class="sb-item" data-section="repositories">
+        <span class="sb-icon"><i class="fa-solid fa-book-open"></i></span>
+        <span class="sb-label">Repositories</span>
+        <span class="sb-dot"></span>
+      </a>
+    </nav>
+
+    
+    <!-- Sidebar bottom -->
+
+    <div class="sb-bottom">
+      <div class="sb-section-label">Account</div>
+      <button class="sb-item sb-logout" id="logout-btn">
+        <span class="sb-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+        <span class="sb-label">Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Sidebar overlay (mobile) -->
+  <div class="sb-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+
+  <!-- ──────────────────────────────────
+       MAIN CONTENT
+       ────────────────────────────────── -->
+  <div class="main-wrap">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <!-- Mobile menu toggle -->
+      <button class="topbar-menu-btn" id="menu-btn" onclick="toggleSidebar()" aria-label="Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Search area -->
+      <div class="topbar-search-wrap">
+        <div class="topbar-search" id="topbar-search">
+          <i class="fa-brands fa-github ts-icon"></i>
+          <input
+            type="text"
+            id="username-input"
+            class="ts-input"
+            placeholder="Enter GitHub username…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="ts-btn" id="analyze-btn" onclick="analyzeUser()">
+            <span class="ts-btn-text">Analyze</span>
+            <i class="fa-solid fa-arrow-right ts-btn-icon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div class="topbar-right">
+        <!-- Current username tag -->
+        <div class="current-user-tag" id="current-user-tag" style="display:none">
+          <i class="fa-brands fa-github"></i>
+          <span id="current-uname-display"></span>
+        </div>
+        <!-- User info -->
+        <div class="topbar-user">
+          <div class="topbar-avatar" id="topbar-avatar">
+            <span id="topbar-initial">U</span>
+          </div>
+          <div class="topbar-user-info">
+            <span class="topbar-email" id="topbar-email">user@email.com</span>
+            <span class="topbar-role">Developer</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb-bar">
+      <span class="bc-root">DevIntel</span>
+      <i class="fa-solid fa-chevron-right bc-sep"></i>
+      <span class="bc-current" id="bc-current">Overview</span>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <main class="content-area" id="content-area">
+
+      <!-- ── EMPTY STATE (shown before first analysis) ── -->
+      <section class="section-panel active" id="section-empty">
+        <div class="empty-hero">
+          <div class="empty-orb eh-1"></div>
+          <div class="empty-orb eh-2"></div>
+          <canvas id="empty-canvas"></canvas>
+          <div class="empty-content">
+            <div class="empty-icon-ring">
+              <i class="fa-solid fa-hexagon-nodes"></i>
+            </div>
+            <h1 class="empty-title">AI Developer Intelligence</h1>
+            <p class="empty-sub">Enter a GitHub username in the search bar above and click <strong>Analyze</strong> to generate a complete intelligence report.</p>
+            <div class="empty-features">
+              <div class="ef-item"><i class="fa-solid fa-bolt"></i><span>Developer Score</span></div>
+              <div class="ef-item"><i class="fa-solid fa-briefcase"></i><span>Recruiter View</span></div>
+              <div class="ef-item"><i class="fa-solid fa-map"></i><span>Career Roadmap</span></div>
+              <div class="ef-item"><i class="fa-solid fa-circle-question"></i><span>Interview Prep</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── OVERVIEW ── -->
+      <section class="section-panel" id="section-overview">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-gauge-high"></i> Overview</h2>
+          <span class="section-badge" id="ov-username-badge"></span>
+        </div>
+        <div class="overview-grid">
+          <!-- Mini profile -->
+          <div class="ov-profile-card glass-card">
+            <div class="opc-banner"></div>
+            <div class="opc-body">
+              <img id="ov-avatar" class="opc-avatar" src="" alt="Avatar" />
+              <div class="opc-name" id="ov-name">—</div>
+              <div class="opc-login" id="ov-login">—</div>
+              <a id="ov-gh-link" href="#" target="_blank" class="opc-gh-btn">
+                <i class="fa-brands fa-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+          <!-- Score stat -->
+          <div class="ov-stat-card glass-card accent-cyan">
+            <div class="osc-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="osc-num" id="ov-score">—</div>
+            <div class="osc-label">Developer Score</div>
+            <div class="osc-sub">out of 100</div>
+          </div>
+          <!-- Hire score -->
+          <div class="ov-stat-card glass-card accent-violet">
+            <div class="osc-icon"><i class="fa-solid fa-briefcase"></i></div>
+            <div class="osc-num" id="ov-hire">—</div>
+            <div class="osc-label">Hire Score</div>
+            <div class="osc-sub" id="ov-hire-label">—</div>
+          </div>
+          <!-- Repos -->
+          <div class="ov-stat-card glass-card accent-blue">
+            <div class="osc-icon"><i class="fa-solid fa-folder-open"></i></div>
+            <div class="osc-num" id="ov-repos">—</div>
+            <div class="osc-label">Repositories</div>
+            <div class="osc-sub">public repos</div>
+          </div>
+          <!-- Top 3 languages -->
+          <div class="ov-langs-card glass-card">
+            <div class="olc-title"><i class="fa-solid fa-code"></i> Top Languages</div>
+            <div class="olc-list" id="ov-langs-list"></div>
+          </div>
+          <!-- Quick report -->
+          <div class="ov-report-card glass-card">
+            <div class="olc-title"><i class="fa-solid fa-file-lines"></i> AI Summary</div>
+            <p class="orc-text" id="ov-report-text">Run an analysis to see the AI-generated developer summary.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── GITHUB PROFILE ── -->
+      <section class="section-panel" id="section-github-profile">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-brands fa-github"></i> GitHub Profile</h2>
+        </div>
+        <div class="gh-profile-layout">
+          <div class="ghp-card glass-card">
+            <div class="ghp-banner"></div>
+            <div class="ghp-body">
+              <div class="ghp-avatar-wrap">
+                <img id="ghp-avatar" src="" alt="" />
+                <div class="ghp-avatar-ring"></div>
+              </div>
+              <h2 class="ghp-name" id="ghp-name">—</h2>
+              <p class="ghp-login" id="ghp-login">—</p>
+              <p class="ghp-bio" id="ghp-bio"></p>
+              <div class="ghp-meta" id="ghp-meta"></div>
+              <div class="ghp-stats">
+                <div class="ghps"><span class="ghps-n" id="ghps-repos">0</span><span class="ghps-l">Repos</span></div>
+                <div class="ghps"><span class="ghps-n" id="ghps-followers">0</span><span class="ghps-l">Followers</span></div>
+                <div class="ghps"><span class="ghps-n" id="ghps-following">0</span><span class="ghps-l">Following</span></div>
+                <div class="ghps"><span class="ghps-n" id="ghps-gists">0</span><span class="ghps-l">Gists</span></div>
+              </div>
+              <a id="ghp-link" href="#" target="_blank" class="ghp-view-btn">
+                <i class="fa-brands fa-github"></i> View on GitHub
+              </a>
+            </div>
+          </div>
+          <div class="ghp-info-col">
+            <div class="glass-card ghp-info-card" id="ghp-info-extra"></div>
+            <div class="glass-card ghp-activity-card">
+              <div class="gac-title"><i class="fa-solid fa-chart-simple"></i> Account Details</div>
+              <div class="gac-grid" id="ghp-details-grid"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── DEVELOPER SCORE ── -->
+      <section class="section-panel" id="section-developer-score">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Developer Score</h2>
+        </div>
+        <div class="score-layout">
+          <!-- Ring -->
+          <div class="score-ring-card glass-card">
+            <div class="score-ring-wrap">
+              <svg class="score-svg" viewBox="0 0 160 160">
+                <defs>
+                  <linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e5ff"/>
+                    <stop offset="100%" stop-color="#8b5cf6"/>
+                  </linearGradient>
+                </defs>
+                <circle class="sr-track" cx="80" cy="80" r="66"/>
+                <circle class="sr-fill"  cx="80" cy="80" r="66" id="score-ring-circle"
+                  stroke-dasharray="414.69" stroke-dashoffset="414.69"/>
+              </svg>
+              <div class="score-center">
+                <span class="sc-num" id="score-big-num">0</span>
+                <span class="sc-lbl">/ 100</span>
+              </div>
+            </div>
+            <p class="score-ring-label" id="score-ring-label">Awaiting analysis</p>
+          </div>
+          <!-- Sub scores -->
+          <div class="score-bars-card glass-card">
+            <div class="sbc-title"><i class="fa-solid fa-sliders"></i> Score Breakdown</div>
+            <div id="score-bars-container"></div>
+          </div>
+          <!-- Report card -->
+          <div class="score-report-card glass-card">
+            <div class="sbc-title"><i class="fa-solid fa-file-contract"></i> Developer Report</div>
+            <div class="src-body" id="score-report-body"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── RECRUITER VIEW ── -->
+      <section class="section-panel" id="section-recruiter-view">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Recruiter View</h2>
+        </div>
+        <div class="recruiter-layout">
+          <div class="rec-hero-card glass-card">
+            <div class="rhc-glow"></div>
+            <div class="rhc-score-wrap">
+              <div class="rhc-score" id="rec-score-num">—</div>
+              <div class="rhc-score-label">Hire Score</div>
+              <div class="rhc-gauge">
+                <div class="rhc-gauge-fill" id="rec-gauge-fill"></div>
+              </div>
+            </div>
+            <div class="rhc-badge-wrap">
+              <div class="rhc-badge" id="rec-verdict-badge">—</div>
+            </div>
+          </div>
+          <div class="rec-details-card glass-card">
+            <div class="sbc-title"><i class="fa-solid fa-id-card"></i> Candidate Summary</div>
+            <div class="rdc-grid" id="rec-details-grid"></div>
+          </div>
+          <div class="rec-insights-card glass-card">
+            <div class="sbc-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Key Insights</div>
+            <ul class="rec-insights-list" id="rec-insights-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── LANGUAGES ── -->
+      <section class="section-panel" id="section-languages">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-code"></i> Top Languages</h2>
+        </div>
+        <div class="langs-layout">
+          <div class="langs-bars-card glass-card">
+            <div class="sbc-title"><i class="fa-solid fa-chart-bar"></i> Usage Distribution</div>
+            <div id="langs-bars-container"></div>
+          </div>
+          <div class="langs-cards-wrap" id="langs-cards-wrap"></div>
+        </div>
+      </section>
+
+      <!-- ── RECOMMENDATIONS ── -->
+      <section class="section-panel" id="section-recommendations">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-lightbulb"></i> Project Recommendations</h2>
+          <span class="section-badge">AI Curated</span>
+        </div>
+        <div class="reco-grid" id="reco-grid"></div>
+      </section>
+
+      <!-- ── CAREER ROADMAP ── -->
+      <section class="section-panel" id="section-roadmap">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-map"></i> Career Roadmap</h2>
+          <span class="section-badge">Personalized</span>
+        </div>
+        <div class="roadmap-wrap">
+          <div class="roadmap-timeline" id="roadmap-timeline"></div>
+        </div>
+      </section>
+
+      <!-- ── INTERVIEW QUESTIONS ── -->
+      <section class="section-panel" id="section-interview">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-circle-question"></i> Interview Questions</h2>
+          <span class="section-badge">Tailored for You</span>
+        </div>
+        <div class="interview-grid" id="interview-grid"></div>
+      </section>
+
+      <!-- ── REPOSITORIES ── -->
+      <section class="section-panel" id="section-repositories">
+        <div class="section-header">
+          <h2 class="section-title"><i class="fa-solid fa-book-open"></i> Repositories</h2>
+          <span class="repo-total-badge" id="repo-total-badge"></span>
+        </div>
+        <div class="repo-grid" id="repo-grid"></div>
+      </section>
+<section class="section-panel" id="section-resume-analyzer">
+  <div class="section-header">
+    <h2 class="section-title">
+      <i class="fa-solid fa-file-lines"></i>
+      Resume Analyzer
+    </h2>
+    <span class="section-badge">PDF ATS Checker</span>
+  </div>
+
+  <div class="resume-analyzer-grid">
+    <div class="glass-card resume-input-card">
+      <h3 class="resume-card-title">Upload Resume PDF</h3>
+      <p class="resume-card-sub">
+        Upload your resume PDF. DevIntel will calculate ATS score and suggest best matching roles.
+      </p>
+
+      <input type="file" id="resume-file" class="resume-select" accept=".pdf" />
+
+      <button class="resume-analyze-btn" onclick="analyzeResumePdf()">
+        <i class="fa-solid fa-upload"></i>
+        Analyze Resume PDF
+      </button>
+    </div>
+
+    <div class="glass-card resume-result-card">
+      <h3 class="resume-card-title">ATS Result</h3>
+      <div id="resume-result" class="resume-result-empty">
+        Upload your resume PDF to see ATS score and matching roles.
+      </div>
+      <button class="resume-analyze-btn" onclick="downloadAtsReport()">
+        <i class="fa-solid fa-download"></i>
+        Download ATS Report
+      </button>
+    </div>
+  </div>
+</section>
+
+  
+
+<section class="section-panel" id="section-resume-history">
+  <div class="section-header">
+    <h2 class="section-title">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      Resume History
+    </h2>
+    <span class="section-badge">Previous Analysis</span>
+  </div>
+
+  <div class="glass-card">
+    <button class="resume-analyze-btn" onclick="loadResumeHistory()">
+      Load History
+    </button>
+
+    <br><br>
+
+    <div id="resume-history-list"></div>
+  </div>
+</section>
+
+    </main>
+  </div><!-- /.main-wrap -->
+</div><!-- /.app-shell -->
+
+<script src="/js/auth.js"></script>
+<script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — DevIntel</title>
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Auth styles -->
+  <link rel="stylesheet" href="/css/auth.css" />
+</head>
+<body>
+
+  <!-- ── Background particles canvas ── -->
+  <canvas id="auth-canvas"></canvas>
+
+  <!-- ── Ambient glow orbs ── -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ══════════════════════════════════════
+       PAGE  (split: brand panel + form)
+       ══════════════════════════════════════ -->
+  <div class="auth-page">
+
+    <!-- ── LEFT: Brand panel (desktop only) ── -->
+    <aside class="auth-brand-panel">
+      <div class="brand-grid"></div>
+
+      <div class="brand-logo">
+        <div class="brand-logo-icon">
+          <i class="fa-solid fa-hexagon-nodes"></i>
+        </div>
+        <span class="brand-logo-name">DevIntel</span>
+      </div>
+
+      <h1 class="brand-headline">
+        AI Developer<br />
+        <span class="grad">Intelligence</span><br />
+        Platform
+      </h1>
+
+      <p class="brand-sub">
+        Analyze GitHub profiles, calculate developer scores,
+        generate career roadmaps, and get recruiter-ready
+        insights — all powered by AI.
+      </p>
+
+      <div class="brand-pills">
+        <span class="brand-pill">
+          <i class="fa-solid fa-bolt"></i> AI Scoring
+        </span>
+        <span class="brand-pill">
+          <i class="fa-brands fa-github"></i> GitHub Analysis
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-map"></i> Career Roadmap
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-briefcase"></i> Recruiter View
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-circle-question"></i> Interview Prep
+        </span>
+      </div>
+
+      <p class="brand-quote">
+        "DevIntel helped me understand my strengths and land
+        my dream role in 3 months."<br />
+        <strong>— Hamsiny Chandrasekaran, Software Developer</strong>
+      </p>
+    </aside>
+
+    <!-- ── RIGHT: Login form panel ── -->
+    <main class="auth-form-panel">
+      <div class="auth-card">
+
+        <!-- Mobile logo (hidden on desktop) -->
+        <div class="auth-mobile-logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-hexagon-nodes"></i>
+          </div>
+          <span class="logo-name">DevIntel</span>
+        </div>
+
+        <!-- Heading -->
+        <h2 class="auth-heading">Welcome back</h2>
+        <p class="auth-sub">Sign in to your DevIntel account</p>
+
+        <!-- Alert box (shown on success / error) -->
+        <div class="auth-alert" id="login-alert" role="alert">
+          <i class="fa-solid fa-circle-info"></i>
+          <span class="alert-msg"></span>
+        </div>
+
+        <!-- ── Login Form ── -->
+        <form id="login-form" novalidate autocomplete="on">
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label" for="login-email">Email address</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-regular fa-envelope"></i>
+              <input
+                type="email"
+                id="login-email"
+                name="email"
+                class="form-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <span class="field-error" id="err-login-email"></span>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label" for="login-password">Password</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                class="form-input"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-pw"
+                id="toggle-pw"
+                aria-label="Show password"
+                title="Show / hide password"
+              >
+                <i class="fa-regular fa-eye-slash"></i>
+              </button>
+            </div>
+            <span class="field-error" id="err-login-password"></span>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="auth-btn" id="login-btn">
+            <span class="btn-text">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i>
+              &nbsp; Sign In
+            </span>
+            <span class="btn-spinner"></span>
+          </button>
+
+        </form>
+
+        <!-- Divider -->
+        <div class="auth-divider">or</div>
+
+        <!-- Footer link -->
+        <p class="auth-footer-link">
+          New to DevIntel?
+          <a href="/register.html">Create a free account</a>
+        </p>
+
+      </div><!-- /.auth-card -->
+    </main>
+
+  </div><!-- /.auth-page -->
+
+  <!-- Auth JS -->
+  <script src="/js/auth.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — DevIntel</title>
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Auth styles -->
+  <link rel="stylesheet" href="/css/auth.css" />
+
+  <!-- Extra spacing for taller register card -->
+  <style>
+    .auth-form-panel {
+      padding-top: 32px;
+      padding-bottom: 32px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Background particles canvas ── -->
+  <canvas id="auth-canvas"></canvas>
+
+  <!-- ── Ambient glow orbs ── -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ══════════════════════════════════════
+       PAGE  (split: brand panel + form)
+       ══════════════════════════════════════ -->
+  <div class="auth-page">
+
+    <!-- ── LEFT: Brand panel (desktop only) ── -->
+    <aside class="auth-brand-panel">
+      <div class="brand-grid"></div>
+
+      <div class="brand-logo">
+        <div class="brand-logo-icon">
+          <i class="fa-solid fa-hexagon-nodes"></i>
+        </div>
+        <span class="brand-logo-name">DevIntel</span>
+      </div>
+
+      <h1 class="brand-headline">
+        Start your<br />
+        <span class="grad">developer</span><br />
+        journey
+      </h1>
+
+      <p class="brand-sub">
+        Join thousands of developers who use DevIntel to
+        showcase their skills, track their growth, and get
+        hired faster.
+      </p>
+
+      <div class="brand-pills">
+        <span class="brand-pill">
+          <i class="fa-solid fa-chart-line"></i> Track Progress
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-robot"></i> AI Insights
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-star"></i> Stand Out
+        </span>
+        <span class="brand-pill">
+          <i class="fa-solid fa-users"></i> Get Hired
+        </span>
+      </div>
+
+      <!-- Steps -->
+      <div style="display:flex;flex-direction:column;gap:16px;margin-top:8px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.3);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--cyan);flex-shrink:0;">1</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:var(--t1);margin-bottom:2px;">Create your account</div>
+            <div style="font-size:.78rem;color:var(--t2);line-height:1.5;">Enter your name, email and GitHub username</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(74,123,255,.12);border:1px solid rgba(74,123,255,.3);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--blue);flex-shrink:0;">2</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:var(--t1);margin-bottom:2px;">Analyze your profile</div>
+            <div style="font-size:.78rem;color:var(--t2);line-height:1.5;">AI scans your GitHub activity instantly</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);display:grid;place-items:center;font-size:.7rem;font-weight:700;color:var(--violet);flex-shrink:0;">3</div>
+          <div>
+            <div style="font-family:'Syne',sans-serif;font-size:.85rem;font-weight:700;color:var(--t1);margin-bottom:2px;">Get your intelligence report</div>
+            <div style="font-size:.78rem;color:var(--t2);line-height:1.5;">Score, roadmap, and recruiter-ready insights</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="brand-quote">
+         "I built DevIntel to help students analyze their GitHub
+  profiles, improve their skills, and become placement-ready
+  through AI-driven recommendations."<br />
+        <strong>— Hamsiny C., Java Full-Stack Developer</strong>
+      </p>
+    </aside>
+
+    <!-- ── RIGHT: Register form panel ── -->
+    <main class="auth-form-panel">
+      <div class="auth-card">
+
+        <!-- Mobile logo (hidden on desktop) -->
+        <div class="auth-mobile-logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-hexagon-nodes"></i>
+          </div>
+          <span class="logo-name">DevIntel</span>
+        </div>
+
+        <!-- Heading -->
+        <h2 class="auth-heading">Create account</h2>
+        <p class="auth-sub">Join DevIntel — it's completely free</p>
+
+        <!-- Alert box -->
+        <div class="auth-alert" id="reg-alert" role="alert">
+          <i class="fa-solid fa-circle-info"></i>
+          <span class="alert-msg"></span>
+        </div>
+
+        <!-- ── Register Form ── -->
+        <form id="register-form" novalidate autocomplete="off">
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label class="form-label" for="reg-name">Full name</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-regular fa-user"></i>
+              <input
+                type="text"
+                id="reg-name"
+                name="name"
+                class="form-input"
+                placeholder="Hamsiny C."
+                autocomplete="name"
+                required
+              />
+            </div>
+            <span class="field-error" id="err-name"></span>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label class="form-label" for="reg-email">Email address</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-regular fa-envelope"></i>
+              <input
+                type="email"
+                id="reg-email"
+                name="email"
+                class="form-input"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <span class="field-error" id="err-email"></span>
+          </div>
+
+          <!-- GitHub Username -->
+          <div class="form-group">
+            <label class="form-label" for="reg-github">GitHub username</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-brands fa-github"></i>
+              <input
+                type="text"
+                id="reg-github"
+                name="githubUsername"
+                class="form-input"
+                placeholder="Hamsiny-C"
+                autocomplete="off"
+                required
+              />
+            </div>
+            <span class="field-error" id="err-github"></span>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label class="form-label" for="reg-password">Password</label>
+            <div class="input-wrap">
+              <i class="input-icon fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="reg-password"
+                name="password"
+                class="form-input"
+                placeholder="Min. 6 characters"
+                autocomplete="new-password"
+                required
+              />
+              <button
+                type="button"
+                class="toggle-pw"
+                id="toggle-pw"
+                aria-label="Show password"
+                title="Show / hide password"
+              >
+                <i class="fa-regular fa-eye-slash"></i>
+              </button>
+            </div>
+            <!-- Password strength meter -->
+            <div class="pw-strength" id="pw-strength">
+              <div class="pw-strength-bar">
+                <div class="pw-seg"></div>
+                <div class="pw-seg"></div>
+                <div class="pw-seg"></div>
+                <div class="pw-seg"></div>
+              </div>
+              <span class="pw-strength-label" id="pw-label">—</span>
+            </div>
+            <span class="field-error" id="err-password"></span>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="auth-btn" id="reg-btn">
+            <span class="btn-text">
+              <i class="fa-solid fa-user-plus"></i>
+              &nbsp; Create Account
+            </span>
+            <span class="btn-spinner"></span>
+          </button>
+
+        </form>
+
+        <!-- Terms note -->
+        <p class="auth-terms">
+          By creating an account you agree to our
+          <a href="#">Terms of Service</a> and
+          <a href="#">Privacy Policy</a>.
+        </p>
+
+        <!-- Divider -->
+        <div class="auth-divider">already have an account?</div>
+
+        <!-- Footer link -->
+        <p class="auth-footer-link">
+          <a href="/login.html">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+            &nbsp;Sign in instead
+          </a>
+        </p>
+
+      </div><!-- /.auth-card -->
+    </main>
+
+  </div><!-- /.auth-page -->
+
+  <!-- Auth JS -->
+  <script src="/js/auth.js"></script>
+
+</body>
+</html>
